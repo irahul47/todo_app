@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <title>Welcome to To-Do Web App</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+			
+            *{
+                font-family: 'Didact Gothic', sans-serif;
+            }
+            
+            body{
+                background: #1488CC;
+                background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);
+                background: linear-gradient(to right, #2B32B2, #1488CC);
+
+            }
+
+            input{
+					width: 100%;
+					padding: 12px 20px;
+					margin: 8px 0;
+					box-sizing: border-box;
+			}
+
+            .input{
+					width: 100%;
+					margin: 8px 0;
+					box-sizing: border-box;
+			}
+
+            .center-column{
+					width:600px;
+					margin: 20px auto;
+					padding:20px;
+					background-color: #fff;
+					border-radius: 3px;
+			}
+
+            .text-18{
+                font-size: 18px;
+            }
+
+            .btn-blue{
+				color: #ffffff;
+				background: #007bff;
+			}
+
+			.btn-blue:hover{
+				color: #ffffff;
+			}
+        </style>
+    </head>
+    <body>
+        <!-- Navbar -->
+		<nav class="navbar px-4">
+			<a class="navbar-brand text-white" href="#">QuickNotes</a>
+			<ul class="nav justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link text-white" href="list.html">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="#">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="#">Contact</a>
+				</li>
+			</ul>
+        </nav>
+        
+        <h1 class="text-center my-5 text-white"><b>Delete Task</b></h1>
+        <div class="center-column shadow">
+            <p class="text-center text-18 my-3 pb-3">Are you sure you want to delete "{{item}}"?</p>
+
+            <a class="btn input btn-blue" href="{% url 'list' %}">Cancel</a>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input class="btn btn-blue" type="submit" value="Delete task" name="Confirm">
+            </form>
+        </div>
+    </body>
+</html>

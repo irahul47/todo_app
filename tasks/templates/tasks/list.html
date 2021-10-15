@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<title>Welcome to QuickNotes</title>
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+			
+				*{
+					font-family: 'Didact Gothic', sans-serif;
+				}
+				
+				body{
+					background: #1488CC;
+					background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);
+					background: linear-gradient(to right, #2B32B2, #1488CC);
+
+				}
+			
+				input{
+					width: 100%;
+					padding: 12px 20px;
+					margin: 8px 0;
+					box-sizing: border-box;
+				}
+			
+				.submit{
+					background-color: #6BA3E8;
+				}
+			
+				.center-column{
+					width:600px;
+					margin: 20px auto;
+					padding:20px;
+					background-color: #fff;
+					border-radius: 3px;
+				}
+
+				.btn-blue{
+					color: #ffffff;
+					background: #007bff;
+				}
+
+				.btn-blue:hover{
+					color: #ffffff;
+				}
+			
+				.item-row{
+					margin: 10px;
+					border-radius: 3px;
+					font-size: 16px;
+				}
+			
+				.btn-danger{
+					background-color: #ffae19;
+					border-color: #e59400;
+				}
+			</style>
+	</head>
+	<body>
+
+		<!-- Navbar -->
+		<nav class="navbar px-4">
+			<a class="navbar-brand text-white" href="#">QuickNotes</a>
+			<ul class="nav justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link text-white" href="list.html">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="#">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="#">Contact</a>
+				</li>
+			</ul>
+		</nav>
+
+		<h1 class="text-center mt-5 my-4 text-white"><b>To-Do Web App</b></h1>
+		<p class="text-white mb-5 text-center">Regain clarity and calmness by getting all those tasks out of your head and onto your to-do list.</p>
+
+		<div class="center-column shadow">
+			<form method="POST" action="/">
+				{% csrf_token %} <!--Here we need to let django know that we're able to take this-->
+				{{form.title}} <!--It will give the access of title field-->
+				<input class="btn btn-blue" type="submit" value="Add task" name="Create Task">
+			</form>
+
+			<div class="todo-list">
+				{% for task in tasks %} <!--For Loop-->
+					<div class="item-row">
+						<div class="card shadow-sm">
+							<div class="card-body">
+							<p class="card-text">
+								{% if task.complete == True %}
+								<strike>{{task}}</strike>
+								{% else %}
+								<span>{{task}}</span>
+								{% endif %}
+							</p>
+							<a href="{% url 'update_task' task.id %}"  class="card-link">Update</a> 
+							<a href="{% url 'delete' task.id %}" class="card-link">Delete</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %} <!--Ending of For Loop-->
+			</div>
+		</div>
+
+		<!--Footer-->
+		<div class="footer-copyright text-center text-white">
+			<p>&copy; 2020, QuickNotes Inc.</p>
+		</div>
+	</body>
+</html>
